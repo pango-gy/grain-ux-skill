@@ -10,19 +10,33 @@ Maintained by [Pango Gy](https://pango-gy.com).
 
 Use it alongside frontend builders, design-system skills, UI kits, and product code review. Those tools help agents build the interface; `grain` helps them notice whether the interface respects user effort, attention, accessibility, trust, and recovery.
 
+## The Name
+
+`grain` means the natural direction or texture of a material, like wood grain. To work "with the grain" is to move with that natural structure instead of fighting it. This skill uses the name because good UX follows how people actually think, read, decide, trust, and recover.
+
 ## Install
 
 ```bash
 npx skills add pango-gy/grain-ux-skill
 ```
 
-The installer detects supported AI tools and creates `grain` inside each one. Re-run the same command to update.
+By default, the `skills` CLI installs project skills into `./.agents/skills/grain`. That shared directory is the project-level location used by universal agents such as Codex and Gemini CLI. Agents with their own project skill directory, such as Claude Code, get a symlink or copy when that directory exists in the project.
+
+To materialize copies for every supported agent directory:
+
+```bash
+npx skills add pango-gy/grain-ux-skill --agent '*' --skill '*' -y --copy
+```
+
+Re-run the add command to update.
 
 To remove:
 
 ```bash
 npx skills remove grain
 ```
+
+This removes the installed skill directories. If your project uses `skills-lock.json`, review that file after removal because the CLI may keep source metadata there for restore/update workflows.
 
 ## What Triggers It
 
@@ -56,6 +70,8 @@ Each domain has a deeper reference under [`skill/references/`](skill/references)
 `grain` applies these laws first:
 
 - Make the next action obvious.
+- Simplify the rule before the screen.
+- Show value before asking for effort.
 - Preserve user effort.
 - Do not surprise the user.
 - Let users undo, not just confirm.

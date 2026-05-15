@@ -111,6 +111,10 @@ Different empty states exist for the same screen:
 
 The user must always know: *is something happening, and how long*.
 
+Before designing the loading state, try to remove the wait. Cache, prefetch, background the work, shorten the policy path, or let the user continue while the job runs. A good loading state is still a tax; it is just an honest tax.
+
+Measure before optimizing. Name the user-visible symptom: slow first load, blocked input, scroll jank, repeated request, memory pressure, or a long-running task. If the change cannot be tied to a real wait or wasted work, do not sacrifice readability for it.
+
 - **< 100ms**: no indicator needed; feels instant.
 - **100ms – 1s**: brief subtle indicator (button shows spinner, cursor changes). No full-screen blocker.
 - **1s – 4s**: explicit indicator with label ("Generating preview...").
@@ -166,6 +170,8 @@ Two users edited the same thing. Now what.
 - **Modal errors that block the entire app.** Reserve full-screen blockers for truly fatal states.
 - **Empty state showing a generic illustration with no instruction.** Pretty does not mean helpful.
 - **"Please wait..."** for more than 1 second with no estimate or progress.
+- **Spinner as strategy.** The team improves the indicator while leaving an avoidable wait in the flow.
+- **Theoretical micro-optimization.** Code gets harder to understand for a speedup nobody measured and no user can feel.
 - **Error logs in the UI.** Stack traces and error codes are for support tickets, not for users. Show the user something useful; log the stack trace for the developer.
 
 ## 14. Tone in error messages
@@ -187,6 +193,8 @@ When reviewing edge cases and errors:
 - [ ] Does every error answer *what*, *why*, and *what now*?
 - [ ] Is destructive action reversible (soft delete + undo) or, if not, gated by typed-input confirm?
 - [ ] Is validation timing correct: on blur, not on first focus?
+- [ ] Did I try to remove, background, cache, or shorten the wait before polishing loading UI?
+- [ ] Is any optimization tied to a measured or clearly user-visible bottleneck?
 - [ ] Are loading states honest about duration?
 - [ ] Does the system never blame the user?
 - [ ] Does retry preserve user input?

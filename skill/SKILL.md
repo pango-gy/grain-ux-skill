@@ -6,7 +6,7 @@ metadata:
   author: "Pango Gy CTO 유승재 <pinkyooysj@pango-gy.com>"
   organization: "Pango Gy"
   homepage: "https://pango-gy.com"
-  version: "0.2.0"
+  version: "0.3.0"
 ---
 
 # grain
@@ -24,18 +24,20 @@ Do not invent rules. If a situation is not covered here, prefer the smallest cha
 These cut across every domain. Apply them in order — earlier laws beat later ones when they conflict.
 
 1. **Make the next action obvious.** A user should never have to ask "what do I do now?"
-2. **Reduce decisions before reducing clicks.** One extra click on a clear path beats one fewer click on a confusing one.
-3. **Show state, not just controls.** The user must know what the system is doing, what it just did, and what will happen if they act.
-4. **Usable means accessible.** A flow that depends on perfect vision, a mouse, hover, motion, a large screen, or a fast network is unfinished.
-5. **Preserve user effort.** Input, choices, progress, drafts, and context must survive errors, navigation, refresh, and retry.
-6. **Let users undo, not just confirm.** Confirmation dialogs train users to ignore them. Reversibility is the real safety net.
-7. **Words are UI. Read them aloud.** If a label, error, or instruction sounds awkward spoken, it is wrong. Rewrite.
-8. **Match the user's model, not the system's.** Name things after what the user is trying to do, not after the table, endpoint, or class.
-9. **Defaults are decisions.** Whatever is pre-selected, pre-filled, or pre-checked, you are choosing for the majority of users. Choose deliberately.
-10. **Do not surprise the user.** Sharing, deletion, billing, permissions, AI output, and automation must expose consequences before action.
-11. **Edges are the product.** Empty, loading, failed, partial, offline, permission-denied, and conflict states are first-class screens.
-12. **Consistency over cleverness.** A novel pattern must earn its place by being demonstrably better; otherwise, match what the rest of the product does.
-13. **Respect the user's attention.** Every interruption — modal, toast, badge, sound, vibration — is a withdrawal from a finite budget.
+2. **Simplify the rule before the screen.** A complex policy, pricing rule, eligibility rule, or workflow will feel complex no matter how polished the UI is.
+3. **Reduce decisions before reducing clicks.** One extra click on a clear path beats one fewer click on a confusing one.
+4. **Show state, not just controls.** The user must know what the system is doing, what it just did, and what will happen if they act.
+5. **Show value before asking for effort.** Before signup, permission, payment, sensitive input, or a long form, make the benefit and consequence visible.
+6. **Usable means accessible.** A flow that depends on perfect vision, a mouse, hover, motion, a large screen, or a fast network is unfinished.
+7. **Preserve user effort.** Input, choices, progress, drafts, and context must survive errors, navigation, refresh, and retry.
+8. **Let users undo, not just confirm.** Confirmation dialogs train users to ignore them. Reversibility is the real safety net.
+9. **Words are UI. Read them aloud.** If a label, error, or instruction sounds awkward spoken, it is wrong. Rewrite.
+10. **Match the user's model, not the system's.** Name things after what the user is trying to do, not after the table, endpoint, or class.
+11. **Defaults are decisions.** Whatever is pre-selected, pre-filled, or pre-checked, you are choosing for the majority of users. Choose deliberately.
+12. **Do not surprise the user.** Sharing, deletion, billing, permissions, AI output, and automation must expose consequences before action.
+13. **Edges are the product.** Empty, loading, failed, partial, offline, permission-denied, and conflict states are first-class screens.
+14. **Consistency over cleverness.** A novel pattern must earn its place by being demonstrably better; otherwise, match what the rest of the product does.
+15. **Respect the user's attention.** Every interruption — modal, toast, badge, sound, vibration — is a withdrawal from a finite budget.
 
 ## Domains
 
@@ -44,6 +46,7 @@ These cut across every domain. Apply them in order — earlier laws beat later o
 Design the path before the page. A flow is a sequence of decisions; the screen exists to support one decision at a time.
 
 - One primary action per screen. Secondary actions are visually quieter, not just smaller.
+- Simplify the policy or eligibility rule before explaining a complicated path.
 - Group by the user's task, not by the data model. "Things I own" is a task; "Resources" is a table name.
 - Surface the next step inside the current context — do not send users back to a hub to continue.
 - Never hide a required step behind a non-obvious affordance (icon-only buttons, hover-only menus, gestures without hints).
@@ -57,6 +60,7 @@ Full reference: [`references/flow-and-ia.md`](references/flow-and-ia.md)
 "Simple" does not mean "few features." It means "few decisions per moment." Hide complexity in time and space, not under the rug.
 
 - Show only what the user needs *to make the current decision*. Move the rest behind progressive disclosure.
+- Make every question easy to answer: split hard questions, recommend safe defaults, and retrieve known data.
 - Chunk long forms into stages with visible progress. Each stage should be answerable in under 30 seconds.
 - Prefer recognition over recall — show options instead of asking users to remember them.
 - Reuse the same control for the same idea everywhere in the product. A "Save" button must always save and never sometimes-submit.
@@ -70,6 +74,7 @@ Full reference: [`references/cognitive-load.md`](references/cognitive-load.md)
 Input is work. Every field asks the user to spend attention, memory, trust, or private information.
 
 - Ask only what is needed for the next decision or outcome.
+- Show why the input is worth giving before asking for sensitive, private, or high-effort data.
 - Order fields by the user's reasoning, not by database shape.
 - Mark required, optional, and format rules before failure.
 - Match control type to data: choose, autocomplete, mask, upload, or free text deliberately.
@@ -100,6 +105,7 @@ Users should never wonder, "Wait, did it just send, charge, delete, share, publi
 - Automation must show pending, running, completed, failed, skipped, and cancelled states.
 - AI output is a draft until the user accepts it.
 - Billing, permissions, and privacy copy must expose real consequences.
+- Cost, limits, and trade-offs must be visible before conversion pressure appears.
 - Durable or shared actions need history: who or what changed what, and when.
 
 Full reference: [`references/trust-and-agency.md`](references/trust-and-agency.md)
@@ -113,6 +119,8 @@ Errors are the most-read copy in your product. They appear when users are alread
 - Never blame the user. "Email is invalid" → "We could not find an account with that email."
 - Make destructive actions reversible by default. Confirmation dialogs are the weakest form of safety; undo is the strongest.
 - Empty, loading, partial, offline, and permission-denied states are screens, not afterthoughts. Design them with the same care as the happy path.
+- Before improving a loading state, ask whether the wait can be removed, backgrounded, cached, or shortened.
+- Measure the user-visible bottleneck before trading readability for optimization.
 - Retry must be one tap away. Never make the user re-enter data after a network failure.
 
 Full reference: [`references/errors-and-recovery.md`](references/errors-and-recovery.md)
@@ -126,6 +134,7 @@ Copy is the highest-leverage UI surface — a one-word change in a button label 
 - Match the user's vocabulary, not the team's. If users say "post," do not call it a "submission."
 - Sentence case for everything except proper nouns. Title Case Makes Buttons Feel Like Headings.
 - Tone scales with stakes. Casual for routine, neutral for transactional, formal for irreversible or legal.
+- Respect beats conversion pressure: do not hide cost, effort, risk, or limits behind friendly copy.
 - Never write copy you would not read aloud to a stranger.
 
 Full reference: [`references/microcopy-and-tone.md`](references/microcopy-and-tone.md)
@@ -150,6 +159,11 @@ Refuse these. If asked to implement one, name the anti-pattern, explain the cost
 14. **Form that destroys input.** Resetting fields after validation, navigation, refresh, or network failure violates *Preserve user effort*.
 15. **Consent bundled into one checkbox.** Required agreement, marketing consent, tracking consent, and data sharing must not be hidden behind one control.
 16. **AI or automation that commits without review.** Generated or automated output must not send, publish, charge, delete, or change durable data without explicit approval when stakes are real.
+17. **Complex policy disguised as simple UI.** If the underlying rule is confusing, another tooltip or wizard step will not make the product feel simple. Simplify the rule or expose the trade-off honestly.
+18. **Asking before value is visible.** Signup walls, permission prompts, payment forms, and sensitive questions must not appear before the user understands why the effort is worth it.
+19. **One hard question instead of several easy ones.** If the user must calculate, remember, compare, or infer too much, split the question or let the system do the work.
+20. **Spinner as strategy.** A pretty spinner is not a solution when the wait can be removed, backgrounded, cached, or made cancellable.
+21. **Unmeasured optimization.** Do not make code harder to read for a theoretical speedup. If the bottleneck is not user-visible or measurable, leave the simpler code alone.
 
 ## How to apply
 
@@ -159,6 +173,9 @@ Refuse these. If asked to implement one, name the anti-pattern, explain the cost
 - If two laws conflict in a specific case, prefer the earlier law in the **Core laws** list. Explain the trade-off.
 - When unsure, design the failure case first. If the failure is dignified, the success will be too.
 - Before implementation or review, identify: the user, the current primary decision, the next action, the failure state, and whether the path still works with keyboard, touch, narrow viewport, and reduced motion.
+- Also identify the rule, policy, or business constraint creating the UX cost. If the rule can be simplified, fix the rule before polishing the interface around it.
+- Before a flow asks for effort, identify the visible value the user has already received or is about to receive.
+- If performance is part of the UX cost, identify the user-visible symptom and the measurement before proposing an optimization.
 - For UI code reviews, check changed behavior, not only changed pixels: focus, loading, empty, failed, disabled, permission-denied, undo, and success states.
 - For forms, imports, AI, automation, sharing, billing, or destructive actions, open the relevant reference before answering.
 

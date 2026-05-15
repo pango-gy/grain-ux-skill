@@ -6,6 +6,7 @@ Open this file when designing or reviewing: forms, settings pages, onboarding, d
 
 - What "simple" actually means
 - Decisions are more taxing than reading
+- Hard questions are product work
 - Progressive disclosure
 - Defaults handle the 80% case
 - Chunk long inputs
@@ -37,6 +38,10 @@ A common mistake: cutting words to "make it simpler" while leaving the number of
 - Count the choices on each screen. Three or fewer per visible region is the working ceiling.
 - A long sentence is one decision (read or skip). A list of seven options is seven decisions.
 - Group related options so the user makes a coarse decision first, then a fine one.
+
+Hard questions create hidden choices. If the user has to calculate, compare, remember an external fact, or infer what you mean, the interface has handed them product work. Turn one hard question into several easy ones, offer a recommendation, prefill known data, or retrieve the missing information.
+
+Useful test: can a reasonable user answer this within a few seconds without leaving the screen? If not, the problem is not copy length. The question is too hard.
 
 ## 3. Progressive disclosure
 
@@ -152,6 +157,7 @@ Reduce until the napkin works.
 - **Forms that validate every field on first focus.** Validation should happen on blur or on submit, not as the user is typing the first character.
 - **"Smart" defaults that change based on context the user cannot see.** Defaults must be predictable. If the system picks differently in different states, the user cannot form a mental model.
 - **More than one "primary" call to action.** If you have two primaries, you have two products fighting for the screen.
+- **One hard question.** A single field that asks the user to calculate, remember, compare, or infer too much is not simpler than a guided sequence.
 
 ## 14. Quick checklist
 
@@ -159,6 +165,7 @@ When reviewing for cognitive load:
 
 - [ ] Can the user describe what this screen is for in one sentence?
 - [ ] Is the primary decision obvious within 3 seconds of seeing the screen?
+- [ ] Can every question be answered within a few seconds without external memory or calculation?
 - [ ] Are choices ≤ 3 per visible region (excluding lists with search/filter)?
 - [ ] Are defaults common, safe, and reversible?
 - [ ] Is hierarchy visible without reading?

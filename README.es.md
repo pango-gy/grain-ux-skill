@@ -10,19 +10,33 @@ Mantenido por [Pango Gy](https://pango-gy.com).
 
 Úsalo junto con builders frontend, skills de sistemas de diseño, UI kits y revisión de código de producto. Esas herramientas ayudan al agente a construir la interfaz; `grain` ayuda a comprobar si la interfaz respeta el esfuerzo, la atención, la accesibilidad, la confianza y la recuperación del usuario.
 
+## El Nombre
+
+`grain` significa la dirección o textura natural de un material, como la veta de la madera. Trabajar "with the grain" es avanzar con esa estructura natural en vez de luchar contra ella. Este skill usa ese nombre porque una buena UX sigue cómo las personas realmente piensan, leen, deciden, confían y se recuperan.
+
 ## Instalación
 
 ```bash
 npx skills add pango-gy/grain-ux-skill
 ```
 
-El instalador detecta las herramientas de IA compatibles y crea `grain` dentro de cada una. Ejecuta el mismo comando de nuevo para actualizar.
+Por defecto, `skills` CLI instala skills de proyecto en `./.agents/skills/grain`. Ese directorio compartido es la ubicación de proyecto usada por agentes universales como Codex y Gemini CLI. Los agentes con su propio directorio de skills de proyecto, como Claude Code, reciben un symlink o una copia cuando ese directorio existe en el proyecto.
+
+Para crear copias reales en todos los directorios de agentes compatibles:
+
+```bash
+npx skills add pango-gy/grain-ux-skill --agent '*' --skill '*' -y --copy
+```
+
+Ejecuta de nuevo el comando add para actualizar.
 
 Para eliminarlo:
 
 ```bash
 npx skills remove grain
 ```
+
+Esto elimina los directorios de skill instalados. Si tu proyecto usa `skills-lock.json`, revisa ese archivo después de eliminar porque la CLI puede conservar metadata de origen para flujos de restauración o actualización.
 
 ## Cuándo Se Activa
 
@@ -56,6 +70,8 @@ Cada dominio tiene una referencia más profunda en [`skill/references/`](skill/r
 `grain` aplica primero estas leyes:
 
 - Haz obvia la siguiente acción.
+- Simplifica la regla antes que la pantalla.
+- Muestra valor antes de pedir esfuerzo.
 - Preserva el esfuerzo del usuario.
 - No sorprendas al usuario.
 - Permite deshacer, no solo confirmar.

@@ -5,6 +5,7 @@ Open this file when designing or reviewing: forms, settings, search fields, filt
 ## Contents
 
 - Input is work
+- Show value before asking
 - Order fields by user reasoning
 - Required and optional must be obvious
 - Validation timing follows intent
@@ -19,11 +20,13 @@ Open this file when designing or reviewing: forms, settings, search fields, filt
 
 Every field asks the user to spend attention, memory, trust, and sometimes private information. Treat each field as a cost that must earn its place.
 
+- Show the value before the cost. If a field is sensitive, private, high-effort, or surprising, the user should already know what they get for answering.
 - Ask only what is needed for the next decision or outcome.
 - Explain why sensitive or surprising information is needed.
 - Prefer choosing from known options over typing from memory.
 - Preserve entered data across errors, navigation, refresh, and network failure.
 - Never make users repeat information the system already knows.
+- If the user cannot answer quickly, split the question, offer examples, recommend a default, or use information the system already has.
 
 If a field does not change what the product can do next, remove it or defer it.
 
@@ -120,12 +123,16 @@ Never make a user discover import failure only after the original file context i
 - **Optional fields asked up front.** The product taxes the majority for edge-case data.
 - **Format rules after failure only.** The user could not have known the rule.
 - **Import without preview.** Bulk changes happen before the user can inspect them.
+- **Sensitive question before value.** The form asks for phone, identity, payment, permission, or private data before the user understands why it matters.
+- **Recall test disguised as input.** The user must remember an ID, exact name, date, or setting the system could search, suggest, or retrieve.
 
 ## 10. Quick checklist
 
 When reviewing forms and input:
 
 - [ ] Does every field earn its cost right now?
+- [ ] Is value visible before sensitive, private, or high-effort input?
+- [ ] Are hard questions split, suggested, prefilled, or retrieved where possible?
 - [ ] Are fields ordered by the user's reasoning, not backend shape?
 - [ ] Are required, optional, and format rules visible before failure?
 - [ ] Does validation happen at the right time and focus the first error?

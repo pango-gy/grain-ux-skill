@@ -87,6 +87,8 @@ Exceptions: proper nouns (brand names, product names), single-word labels that a
 
 Personality is fine at the low-stakes end. It becomes inappropriate as stakes rise. A joke in a delete confirmation reads as careless; a joke in a billing failure reads as cruel.
 
+Respect is part of tone. Copy should not make a cost sound smaller than it is, make a risky action feel routine, or hide a trade-off behind warmth. If the business wants the user to act, the copy still owes the user the full consequence before the button.
+
 ## 7. The aloud test
 
 Read every important piece of copy aloud, to yourself, in a normal voice. If it sounds:
@@ -180,6 +182,7 @@ Words that are almost always wrong in product copy:
 - "We" in legalese — be specific (the company name) for legal text; "we" only for product voice.
 - "Click here" — link text should describe the destination.
 - Vague verbs: "manage," "handle," "process," "leverage." Replace with the specific verb.
+- Over-softening risk: "small fee," "quick check," "just verify," "only takes a second" when the cost, effort, or privacy impact is real.
 
 ## 15. Numbers, dates, times
 
@@ -197,6 +200,7 @@ When reviewing copy:
 - [ ] Did I read every important sentence aloud?
 - [ ] Did I cut every word that does not change meaning?
 - [ ] Does tone match stakes (no jokes in errors, no formality in success toasts)?
+- [ ] Does copy expose real cost, effort, risk, and limits before asking for action?
 - [ ] Sentence case throughout?
 - [ ] Empty states explain what the screen will hold and offer a first action?
 - [ ] Errors say what, why, and what now — without blaming the user?

@@ -10,19 +10,33 @@
 
 可以把它和前端生成器、设计系统技能、UI 套件、产品代码评审一起使用。那些工具帮助代理构建界面；`grain` 帮助代理判断这个界面是否尊重用户的努力、注意力、可访问性、信任和恢复路径。
 
+## 名称含义
+
+`grain` 指材料天然的纹理或方向，比如木纹。"with the grain" 的意思是顺着这种自然结构，而不是逆着它。这个技能使用这个名字，是因为好的 UX 应该顺着人们真实思考、阅读、决策、信任和恢复的方式。
+
 ## 安装
 
 ```bash
 npx skills add pango-gy/grain-ux-skill
 ```
 
-安装器会检测支持的 AI 工具，并在每个工具中创建 `grain`。再次运行同一命令即可更新。
+默认情况下，`skills` CLI 会把项目技能安装到 `./.agents/skills/grain`。这个共享目录是 Codex、Gemini CLI 等 universal agent 使用的项目级位置。像 Claude Code 这样拥有专用项目技能目录的 agent，会在该目录存在于项目中时收到 symlink 或 copy。
+
+如果你想为所有受支持的 agent 目录创建实际 copy:
+
+```bash
+npx skills add pango-gy/grain-ux-skill --agent '*' --skill '*' -y --copy
+```
+
+再次运行 add 命令即可更新。
 
 删除:
 
 ```bash
 npx skills remove grain
 ```
+
+该命令会删除已安装的 skill 目录。如果项目使用 `skills-lock.json`，删除后请检查该文件，因为 CLI 可能会保留用于恢复/更新流程的 source metadata。
 
 ## 触发场景
 
@@ -56,6 +70,8 @@ npx skills remove grain
 `grain` 会优先应用这些原则：
 
 - 让下一步行动显而易见。
+- 先简化规则，再设计界面。
+- 在要求用户付出之前先展示价值。
 - 保留用户已经付出的努力。
 - 不让用户感到意外。
 - 不只是要求确认，而是提供撤销。

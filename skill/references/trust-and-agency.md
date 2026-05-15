@@ -11,6 +11,7 @@ Open this file when designing or reviewing: sharing, publishing, billing, privac
 - AI output needs inspection
 - Permissions should explain consequences
 - Billing and plans must be legible
+- Respect beats conversion pressure
 - Auditability is part of UX
 - Anti-patterns
 - Quick checklist
@@ -24,6 +25,7 @@ Before any high-stakes action, the interface must make three things visible:
 - What will happen.
 - Who or what will be affected.
 - Whether and how it can be undone.
+- Why the action is worth taking now, if the user must spend money, trust, private data, or time.
 
 If the consequence cannot be summarized clearly, the action is not ready to be one click.
 
@@ -99,6 +101,8 @@ Money raises stakes. Pricing UX should reduce ambiguity, not optimize confusion.
 
 Trust lost in billing is rarely recovered by better UI elsewhere.
 
+Respect beats conversion pressure. Do not trade long-term trust for a short-term click by hiding effort, risk, limitations, or cost until after commitment. Friendly copy cannot make a concealed trade-off respectful.
+
 ## 8. Auditability is part of UX
 
 When actions have durable or shared consequences, users need a way to reconstruct what happened.
@@ -120,6 +124,7 @@ An audit trail is not only for compliance. It helps users feel oriented after ti
 - **Hidden paid limit.** The user learns the cost only after crossing it.
 - **Permission prompt on first load.** The product asks for trust before earning context.
 - **Dark default.** The default benefits the business while surprising the user.
+- **Benefit exaggerated, cost deferred.** The user sees the upside before commitment, but limits, effort, cancellation, data use, or downside appear only afterward.
 
 ## 10. Quick checklist
 
@@ -131,4 +136,5 @@ When reviewing trust, consent, and agency:
 - [ ] Can the user pause, cancel, undo, or edit automation when stakes justify it?
 - [ ] Does AI output require explicit acceptance before durable or external action?
 - [ ] Are permissions and billing consequences explained in user terms?
+- [ ] Are cost, effort, risk, and limits visible before conversion pressure?
 - [ ] Can the user later see what happened and who or what caused it?

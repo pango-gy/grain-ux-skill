@@ -5,6 +5,7 @@ Open this file when designing or reviewing: page hierarchy, navigation, multi-st
 ## Contents
 
 - The path is the product
+- Simple policy before simple UI
 - One primary action per screen
 - Group by task, not by data model
 - Depth costs more than breadth
@@ -23,14 +24,18 @@ Open this file when designing or reviewing: page hierarchy, navigation, multi-st
 
 Before designing a screen, draw the *flow*. A flow is a sequence of decisions; each screen exists to support exactly one of them. If you cannot describe what decision a screen helps the user make in one sentence, the screen has no reason to exist yet.
 
+- Before polishing a branchy flow, ask whether the underlying rule can be simpler. Eligibility rules, pricing tiers, approval policies, and setup requirements are UX. A clear screen wrapped around a confusing rule still feels confusing.
 - Sketch the happy path as a line of nodes. Each node is one decision.
 - Mark every node where the user could (a) drop out, (b) be blocked, (c) be confused. These are your real design problems — the screens between them are mostly layout.
 - Reduce the number of nodes before you optimize any single one.
+
+Simple policy beats explanatory UI. If a flow needs three help paragraphs to explain who qualifies, when it applies, or what happens next, the first design proposal should be a simpler rule.
 
 ## 2. One primary action per screen
 
 A screen has at most one primary action. Everything else is secondary.
 
+- Each screen also needs one core message. If the user remembers only one thing from the screen, decide what that should be before arranging components.
 - Primary action is visually the heaviest element — filled button, high contrast, anchored where the eye lands.
 - Secondary actions are quieter: outline, ghost, or text link. Quieter, not smaller — small primary buttons get missed.
 - If you find yourself with two primary actions, you have two screens fighting to live in the same place. Split or rank them.
@@ -147,12 +152,15 @@ A user who is lost will leave. A user who is oriented will explore.
 - **Modal-on-modal.** If a modal needs another modal, the first should have been a page.
 - **"Are you sure you want to leave?" prompts for routine navigation.** Train users to dismiss them and lose real warnings.
 - **Search that requires exact spelling.** Use forgiving matching by default; surface "Did you mean" only as a secondary suggestion.
+- **Policy maze explained with UI chrome.** If a path is complex because the rule is complex, do not hide that behind steppers, tooltips, or clever navigation. Simplify the rule or expose the trade-off.
 
 ## 14. Quick checklist
 
 When reviewing a flow or IA, ask:
 
 - [ ] Can I describe each screen's primary decision in one sentence?
+- [ ] Can I describe each screen's core message in one sentence?
+- [ ] Is any confusing branch caused by a policy or eligibility rule that can be simplified?
 - [ ] Is there exactly one primary action per screen?
 - [ ] Are groupings based on user tasks, not on the data model?
 - [ ] Is navigation depth ≤ 2 (3 with strong reason)?
