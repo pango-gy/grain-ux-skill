@@ -162,6 +162,7 @@ Every notification should be actionable, dismissible, or both. Notifications tha
 
 When the product ships in both languages, copy decisions interact:
 
+- In code, do not hardcode new user-facing strings when a locale/i18n structure exists. Add them through the existing locale files and check the layout with the longest supported language.
 - **Korean is denser.** A 5-word English button often translates to 2–3 Korean words. Layout that fits English may have awkward padding in Korean.
 - **Politeness level (존댓말 / 반말).** Default to 존댓말 ("해요" or "합니다" form) for product surfaces. "해요체" reads warm but professional; "합니다체" reads formal and slightly distant. Pick one and apply consistently.
 - **English imperative ≠ Korean imperative.** "Click here" → "여기를 클릭하세요" (polite) or "여기 클릭" (terse). Mood and politeness must match across the product.

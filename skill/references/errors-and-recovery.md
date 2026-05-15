@@ -115,6 +115,8 @@ Before designing the loading state, try to remove the wait. Cache, prefetch, bac
 
 Measure before optimizing. Name the user-visible symptom: slow first load, blocked input, scroll jank, repeated request, memory pressure, or a long-running task. If the change cannot be tied to a real wait or wasted work, do not sacrifice readability for it.
 
+Use these thresholds as default heuristics, not product constants. Adjust them when platform conventions, measured latency, or user expectations justify it, but keep the user informed about state and duration.
+
 - **< 100ms**: no indicator needed; feels instant.
 - **100ms – 1s**: brief subtle indicator (button shows spinner, cursor changes). No full-screen blocker.
 - **1s – 4s**: explicit indicator with label ("Generating preview...").

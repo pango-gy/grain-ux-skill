@@ -1,6 +1,6 @@
 ---
 name: grain
-description: Use when working on any user-facing interface decision — UI components, user flows, forms, input, error states, empty states, copy, microcopy, button labels, navigation, onboarding, dashboards, accessibility, permissions, consent, AI output, automation, billing, sharing, or any moment the user will see, read, click, trust, or recover from something. Covers information architecture, cognitive load reduction, forms and input, accessibility and inclusive interaction, trust and user agency, error prevention and recovery, and microcopy and tone. Applies during design review, code review of UI, writing new components, refactoring flows, drafting product copy, or critiquing screenshots. Not for backend-only logic, infra, or non-user-facing work.
+description: UX execution and review skill for user-facing product work. Use for UI/UX reviews, frontend screens/components, forms and validation, product copy/microcopy, onboarding, dashboards, accessibility, error/empty/loading states, permissions, consent, billing, sharing, AI output, automation, and destructive actions. Stay quiet for backend-only logic, infrastructure, data plumbing, or work with no user-visible behavior.
 license: MIT
 metadata:
   author: "Pango Gy CTO 유승재 <pinkyooysj@pango-gy.com>"
@@ -11,13 +11,70 @@ metadata:
 
 # grain
 
-A UX philosophy skill. Work with the grain of how people actually think, read, and recover — not against it.
+A UX execution and review skill. Work with the grain of how people actually think, read, and recover — not against it.
 
 ## Setup
 
-When this skill is active, treat every user-facing decision as a UX decision. Apply the **Core laws** to every change. When a decision is non-trivial in a specific domain, open the matching file under `references/` before answering. Call laws and anti-patterns by name (e.g., "this violates *Make the next action obvious*") so reviews stay concrete.
+When this skill is active, treat every user-facing decision as UX. Use `grain` as a judgment layer on top of the product's existing design contract, not as a replacement for local conventions.
+
+Before coding or reviewing, inspect the relevant product context when available: design docs, existing components, design system, i18n/locale structure, accessibility patterns, and nearby flows. Follow them unless they violate the **Core laws**; if they do, make the smallest corrective change and name the conflict.
 
 Do not invent rules. If a situation is not covered here, prefer the smallest change that satisfies the laws, and say so.
+
+## Activation and scope
+
+Use this skill actively when the work changes what a user sees, reads, clicks, decides, trusts, grants, pays for, recovers from, or loses.
+
+Stay quiet for backend-only logic, infrastructure, internal refactors, tests, data plumbing, or tooling unless they change user-visible behavior, latency, permissions, recovery, trust, or data loss risk.
+
+## Before answering
+
+Identify these before implementation, review, or critique. Expose them in the answer only when useful:
+
+- The user or role being served.
+- The current primary decision and the next action the interface should make obvious.
+- The visible value before the interface asks for signup, payment, permission, private data, or effort.
+- The happy path, failure path, empty/loading/partial states, and recovery path.
+- The rule, policy, or business constraint creating UX cost.
+- Whether the primary task still works with keyboard, touch, narrow viewport, and reduced motion.
+- The existing project contract: design docs, component library, route patterns, product voice, and i18n structure.
+
+## Reference routing
+
+Open the smallest set of references needed. When several domains match, start with the highest-stakes consequence: trust and recovery before polish, input before copy, flow before visual density.
+
+| Trigger | Open first | Also open when |
+| --- | --- | --- |
+| Navigation, page hierarchy, multi-step flows, dashboards, onboarding path, entry/exit | `references/flow-and-ia.md` | Add cognitive load for dense decision surfaces. |
+| Dense screens, settings, defaults, choices, progressive disclosure | `references/cognitive-load.md` | Add flow when location or sequence is unclear. |
+| Forms, search, filters, uploads, imports, validation, onboarding questions | `references/forms-and-input.md` | Add errors for failure states; add trust for imports, bulk edits, or sensitive data. |
+| Keyboard, focus, labels, touch, contrast, motion, responsive layout, localization assumptions | `references/accessibility-and-inclusion.md` | Use for any UI implementation that changes interaction behavior. |
+| Sharing, publishing, billing, privacy, permissions, notifications, AI output, automation, destructive actions, account settings | `references/trust-and-agency.md` | Add errors for recovery; add microcopy for consent, billing, or permission text. |
+| Empty, loading, failed, partial, offline, permission-denied, validation, conflict, retry | `references/errors-and-recovery.md` | Add forms when input is involved; add trust for destructive or external impact. |
+| Buttons, labels, error copy, empty-state copy, onboarding copy, banners, toasts, legal microcopy | `references/microcopy-and-tone.md` | Add trust for cost, consent, privacy, billing, AI, or permissions. |
+
+Use Core laws only when the change is tiny and no domain-specific rule would alter the decision. For forms, imports, AI, automation, sharing, billing, permissions, or destructive actions, open the relevant reference before answering.
+
+## Output contracts
+
+Respect the user's requested format when explicit. Otherwise:
+
+- **Reviews and audits:** lead with findings, ordered by severity. Each finding should name the issue, violated law or anti-pattern, user impact, smallest fix, and verification needed. If there are no findings, say so and note residual risk or untested states.
+- **Implementation work:** state the UX behavior being targeted, make the smallest project-consistent change, preserve existing components and voice, and avoid broad redesign. In the final answer, report changed behavior, covered states, validation, and any remaining risk.
+- **Copy work:** show the before/after when useful, explain the decision in terms of user action or trust, preserve product tone, and route new strings through the existing locale/i18n structure when one exists.
+- **Design plans:** name the user, primary decision, next action, required states, accessibility checks, and the smallest buildable slice.
+
+## Verification
+
+For implemented UI changes, verify the states that changed where practical:
+
+- Keyboard path, focus order, focus trap/restore, and visible focus.
+- Narrow viewport and touch path; no hover-only or pointer-only primary task.
+- Reduced motion or motion-off behavior when animation carries state.
+- Empty, loading, failed, disabled, permission-denied, undo/retry, and success states.
+- Copy length in supported locales, especially buttons, tabs, table cells, and constrained containers.
+
+If runtime verification is not possible, say which checks remain unverified.
 
 ## Core laws
 
@@ -141,29 +198,33 @@ Full reference: [`references/microcopy-and-tone.md`](references/microcopy-and-to
 
 ## Anti-patterns
 
-Refuse these. If asked to implement one, name the anti-pattern, explain the cost, and propose the smallest alternative that meets the same goal.
+Treat anti-patterns as objections with different force:
 
-1. **Modal as the first thought.** Modals interrupt. Use them only for decisions that block the next step. Never for confirmations of low-stakes actions, never for marketing.
-2. **Irreversible destructive action without object-specific safety.** If there is no undo, trash, or retention path, name the object and consequence; for high-blast-radius actions, require typed confirmation.
-3. **Error toast that auto-dismisses.** If it disappears in 3 seconds, the user did not read it. Make errors persistent until dismissed or resolved.
-4. **Disabled buttons with no explanation.** A greyed-out "Save" with no tooltip teaches the user nothing. Either say why or do not disable it.
-5. **Empty state that just says "No items."** Every empty state is a chance to teach what this screen does and offer the first action.
-6. **Required field marked only with red text after submit.** Mark required fields *before* the user types, not after.
-7. **Loading spinner with no context.** "Loading..." for more than 1 second needs a label ("Generating preview..."). For more than 4 seconds, a progress estimate or a way to cancel.
-8. **Hover-only affordances on touch surfaces.** If a feature is only discoverable via hover, it does not exist for half the users.
-9. **Settings that hide important behavior.** If toggling a setting could surprise the user later (notifications, sharing, deletion), surface the consequence inline at the moment of toggle.
-10. **Onboarding that asks for everything up front.** Ask for what is needed to complete the *next* step, not the entire profile.
-11. **Confirmation that does not name the object.** "Are you sure?" → "Delete *Q4 Report (2026)*?"
-12. **Success states that vanish.** A success toast that fades before the user looks up leaves them wondering if anything happened. Pair feedback with a persistent state change.
-13. **Pointer-only path.** Any task that requires hover, drag, or precise cursor movement must also have a visible keyboard/touch path.
-14. **Form that destroys input.** Resetting fields after validation, navigation, refresh, or network failure violates *Preserve user effort*.
-15. **Consent bundled into one checkbox.** Required agreement, marketing consent, tracking consent, and data sharing must not be hidden behind one control.
-16. **AI or automation that commits without review.** Generated or automated output must not send, publish, charge, delete, or change durable data without explicit approval when stakes are real.
-17. **Complex policy disguised as simple UI.** If the underlying rule is confusing, another tooltip or wizard step will not make the product feel simple. Simplify the rule or expose the trade-off honestly.
-18. **Asking before value is visible.** Signup walls, permission prompts, payment forms, and sensitive questions must not appear before the user understands why the effort is worth it.
-19. **One hard question instead of several easy ones.** If the user must calculate, remember, compare, or infer too much, split the question or let the system do the work.
-20. **Spinner as strategy.** A pretty spinner is not a solution when the wait can be removed, backgrounded, cached, or made cancellable.
-21. **Unmeasured optimization.** Do not make code harder to read for a theoretical speedup. If the bottleneck is not user-visible or measurable, leave the simpler code alone.
+- **Block** when the requested behavior hides consent/cost, commits durable or external AI/automation output without review, destroys meaningful work, makes a primary task inaccessible, or creates high-blast-radius destructive action without object-specific safety. Do not implement the unsafe version; offer the closest compliant alternative. If the user explicitly overrides and the work is still allowed, add visible guardrails and name the residual risk.
+- **Push back** when the request would confuse, interrupt, obscure, or make recovery harder. Object once, propose the smallest safer change, and continue if the user still wants the trade-off.
+- **Mitigate** when the issue is local polish or copy quality. Improve it inside the requested scope and note any remaining compromise only if it matters.
+
+1. **[Push back] Modal as the first thought.** Modals interrupt. Use them only for decisions that block the next step. Never for confirmations of low-stakes actions, never for marketing.
+2. **[Block] Irreversible destructive action without object-specific safety.** If there is no undo, trash, or retention path, name the object and consequence; for high-blast-radius actions, require typed confirmation.
+3. **[Push back] Error toast that auto-dismisses.** If it disappears in 3 seconds, the user did not read it. Make errors persistent until dismissed or resolved.
+4. **[Push back] Disabled buttons with no explanation.** A greyed-out "Save" with no tooltip teaches the user nothing. Either say why or do not disable it.
+5. **[Mitigate] Empty state that just says "No items."** Every empty state is a chance to teach what this screen does and offer the first action.
+6. **[Push back] Required field marked only with red text after submit.** Mark required fields *before* the user types, not after.
+7. **[Push back] Loading spinner with no context.** "Loading..." for more than 1 second needs a label ("Generating preview..."). For longer waits, add a progress estimate, cancellation, or backgrounding.
+8. **[Block for primary tasks] Hover-only affordances on touch surfaces.** If a feature is only discoverable via hover, it does not exist for half the users.
+9. **[Push back] Settings that hide important behavior.** If toggling a setting could surprise the user later (notifications, sharing, deletion), surface the consequence inline at the moment of toggle.
+10. **[Push back] Onboarding that asks for everything up front.** Ask for what is needed to complete the *next* step, not the entire profile.
+11. **[Push back] Confirmation that does not name the object.** "Are you sure?" -> "Delete *Q4 Report (2026)*?"
+12. **[Mitigate] Success states that vanish.** A success toast that fades before the user looks up leaves them wondering if anything happened. Pair feedback with a persistent state change.
+13. **[Block for primary tasks] Pointer-only path.** Any task that requires hover, drag, or precise cursor movement must also have a visible keyboard/touch path.
+14. **[Block when effort is significant] Form that destroys input.** Resetting fields after validation, navigation, refresh, or network failure violates *Preserve user effort*.
+15. **[Block] Consent bundled into one checkbox.** Required agreement, marketing consent, tracking consent, and data sharing must not be hidden behind one control.
+16. **[Block for durable or external impact] AI or automation that commits without review.** Generated or automated output must not send, publish, charge, delete, or change durable data without explicit approval when stakes are real.
+17. **[Push back] Complex policy disguised as simple UI.** If the underlying rule is confusing, another tooltip or wizard step will not make the product feel simple. Simplify the rule or expose the trade-off honestly.
+18. **[Push back] Asking before value is visible.** Signup walls, permission prompts, payment forms, and sensitive questions must not appear before the user understands why the effort is worth it.
+19. **[Mitigate] One hard question instead of several easy ones.** If the user must calculate, remember, compare, or infer too much, split the question or let the system do the work.
+20. **[Push back] Spinner as strategy.** A pretty spinner is not a solution when the wait can be removed, backgrounded, cached, or made cancellable.
+21. **[Mitigate] Unmeasured optimization.** Do not make code harder to read for a theoretical speedup. If the bottleneck is not user-visible or measurable, leave the simpler code alone.
 
 ## How to apply
 
@@ -172,12 +233,10 @@ Refuse these. If asked to implement one, name the anti-pattern, explain the cost
 - Preserve the user's voice and product personality. These laws shape *structure*, not personality.
 - If two laws conflict in a specific case, prefer the earlier law in the **Core laws** list. Explain the trade-off.
 - When unsure, design the failure case first. If the failure is dignified, the success will be too.
-- Before implementation or review, identify: the user, the current primary decision, the next action, the failure state, and whether the path still works with keyboard, touch, narrow viewport, and reduced motion.
 - Also identify the rule, policy, or business constraint creating the UX cost. If the rule can be simplified, fix the rule before polishing the interface around it.
 - Before a flow asks for effort, identify the visible value the user has already received or is about to receive.
 - If performance is part of the UX cost, identify the user-visible symptom and the measurement before proposing an optimization.
 - For UI code reviews, check changed behavior, not only changed pixels: focus, loading, empty, failed, disabled, permission-denied, undo, and success states.
-- For forms, imports, AI, automation, sharing, billing, or destructive actions, open the relevant reference before answering.
 
 ## Lineage
 
